@@ -39,8 +39,8 @@ public class TestSteps {
 	public void user_is_redirected_to_results_page_for_that_destination_and_dates() throws Throwable {
 		resultsPage = pageObjectManager.getResultsPage();
 		assertEquals(resultsPage.query_getText(), configFileData.getSearchQuery());
-		assertEquals(resultsPage.checkin_getText(), "Oct 5");
-		assertEquals(resultsPage.checkout_getText(), "Oct 6");
+		assertEquals(resultsPage.checkin_getFormattedValue(), configFileData.getCheckin());
+		assertEquals(resultsPage.checkout_getFormattedValue(), configFileData.getCheckout());
 	}
 	
 	@Then("User can see at least one result in the list of Hotels")
