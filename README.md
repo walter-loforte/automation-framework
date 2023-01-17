@@ -1,10 +1,12 @@
 # Cucumber Automation Framework
 
-run mvn clean test -Denv.BROWSER=CHROME   -> Excute tests on chrome
+Java SDK Installed
+Maven installed
 
-run mvn clean test -Denv.BROWSER=FIREFOX  -> Execute tests on Firefox
+run mvn clean test -Dbrowser=CHROME   -> Excute tests on Chrome
 
+run mvn clean test -Dbrowser=EDGE  -> Execute tests on Edge
 
-One Scenario is set to fail in order to capture a Screenshot and display it in the Report
+run mvn clean test -Dbrowser=FIREFOX  -> Execute tests on Firefox
 
 reports stored in target/cucumber-reports/
