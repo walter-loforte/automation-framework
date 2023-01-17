@@ -12,20 +12,22 @@ public class HomePage {
 	public HomePage(WebDriver driver) {
 	     PageFactory.initElements(driver, this);
 	 }
-	
-	@FindBy(how = How.ID, using = "hotel-destination-hp-hotel") 
-	 private WebElement txtbx_Search;
-	
-	@FindBy(how = How.ID, using = "hotel-checkin-hp-hotel") 
-	 private WebElement txtbx_Checkin;
-	
-	@FindBy(how = How.ID, using = "hotel-checkout-hp-hotel") 
-	 private WebElement txtbx_Checkout;
-	
-	public void completeForm (String query, String checkin, String checkout) {
-		txtbx_Checkin.sendKeys(checkin);
-		txtbx_Checkout.sendKeys(checkout);
-		txtbx_Search.sendKeys(query, Keys.ENTER);
+
+
+	@FindBy(how = How.ID, using = "user-name")
+	private WebElement txtbx_Name;
+
+	@FindBy(how = How.ID, using = "password")
+	private WebElement txtbx_Pass;
+
+	@FindBy(how = How.ID, using = "login-button")
+	private WebElement btn_Login;
+
+
+	public void login(String name, String pass) {
+		txtbx_Name.sendKeys(name);
+		txtbx_Pass.sendKeys(pass);
+		btn_Login.click();
 	}
 
 }

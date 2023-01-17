@@ -2,14 +2,16 @@ package managers;
 
 import org.openqa.selenium.WebDriver;
 
+import pageObjects.CartPage;
 import pageObjects.HomePage;
-import pageObjects.ResultsPage;
+import pageObjects.ProductPage;
 
 public class PageObjectManager {
 	
 	private WebDriver driver;
 	private HomePage homePage;
-	private ResultsPage resultsPage;
+	private ProductPage productPage;
+	private CartPage cartPage;
 	
 	public PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -19,8 +21,12 @@ public class PageObjectManager {
 		 return (homePage == null) ? homePage = new HomePage(driver) : homePage;
 	}
 	
-	public ResultsPage getResultsPage(){
-		 return (resultsPage == null) ? resultsPage = new ResultsPage(driver) : resultsPage;
+	public ProductPage getProductPage(){
+		 return (productPage == null) ? productPage = new ProductPage(driver) : productPage;
+	}
+
+	public CartPage getCartPage(){
+		return (cartPage == null) ? cartPage = new CartPage(driver) : cartPage;
 	}
 
 }

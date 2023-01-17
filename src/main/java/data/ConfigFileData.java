@@ -34,40 +34,16 @@ public class ConfigFileData {
 		else throw new RuntimeException("url not specified in the Configuration.properties file."); 
 	}
 	
-	public String getDriverPath(){
-		String driverPath = properties.getProperty("driverPath");
-		if(driverPath!= null) return driverPath;
-		else throw new RuntimeException("driverPath not specified in the Configuration.properties file."); 
+	public String getName(){
+		String name = properties.getProperty("name");
+		if(name!= null) return name;
+		else throw new RuntimeException("name not specified in the Configuration.properties file.");
 	}
-	
-	public String getSearchQuery(){
-		String searchQuery = properties.getProperty("searchQuery");
-		if(searchQuery!= null) return searchQuery;
-		else throw new RuntimeException("searchQuery not specified in the Configuration.properties file."); 
-	}
-	
-	public String getCheckin(){
-		String checkin = properties.getProperty("checkin");
-		if(checkin!= null) return checkin;
-		else throw new RuntimeException("checkin not specified in the Configuration.properties file."); 
-	}
-	
-	public String getCheckout(){
-		String checkout = properties.getProperty("checkout");
-		if(checkout!= null) return checkout;
-		else throw new RuntimeException("checkout not specified in the Configuration.properties file."); 
-	}
-	
-	public String getBrowser(){
-		String browser = properties.getProperty("browser");
-		if(browser!= null) return browser;
-		else throw new RuntimeException("browser not specified in the Configuration.properties file."); 
-	}
-	
-	public String getReportConfigPath(){
-		String reportConfigPath = properties.getProperty("reportConfigPath");
-		if(reportConfigPath!= null) return reportConfigPath;
-		else throw new RuntimeException("Report Config Path not specified in the Configuration.properties file.");		
+
+	public String getPassword(){
+		String password = properties.getProperty("password");
+		if(password!= null) return password;
+		else throw new RuntimeException("password not specified in the Configuration.properties file.");
 	}
 
 

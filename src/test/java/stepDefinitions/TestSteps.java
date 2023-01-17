@@ -12,12 +12,14 @@ import io.cucumber.java.en.When;
 import data.ConfigFileData;
 import managers.PageObjectManager;
 
+import pageObjects.CartPage;
 import pageObjects.HomePage;
-import pageObjects.ResultsPage;
+import pageObjects.ProductPage;
 
 public class TestSteps {
 	HomePage homePage;
-	ResultsPage resultsPage;
+	ProductPage productPage;
+	CartPage cartPage;
 	PageObjectManager pageObjectManager;
 	ConfigFileData configFileData;
 	protected WebDriver driver = Hooks.getDriver();
@@ -28,31 +30,40 @@ public class TestSteps {
 		driver.get(configFileData.getUrl());
 	}
 
-	@When("^User enters destination and dates$")
-	public void user_enters_destination_and_dates() throws Throwable {
+	@When("User enters name and password")
+	public void user_enters_name_and_password() {
 		pageObjectManager = new PageObjectManager(driver);
 		homePage = pageObjectManager.getHomePage();
-		homePage.completeForm(configFileData.getSearchQuery(), configFileData.getCheckin(), configFileData.getCheckout());
+		homePage.login(configFileData.getName(), configFileData.getPassword());
+	}
+	@Then("User is redirected to inventory page")
+	public void user_is_redirected_to_inventory_page() {
+		productPage = pageObjectManager.getProductPage();
+		assertEquals(productPage.title_getText(), "PRODUCTS");
 	}
 
-	@Then("^User is redirected to results page for that destination and dates$")
-	public void user_is_redirected_to_results_page_for_that_destination_and_dates() throws Throwable {
-		resultsPage = pageObjectManager.getResultsPage();
-		assertEquals(resultsPage.query_getText(), configFileData.getSearchQuery());
-		assertEquals(resultsPage.checkin_getText(), "Dec 5");
-		assertEquals(resultsPage.checkout_getText(), "Dec 6");
+	@Given("User is on Product Page")
+	public void user_is_on_product_page() {
+		configFileData = new ConfigFileData();
+		driver.get(configFileData.getUrl());
+		pageObjectManager = new PageObjectManager(driver);
+		homePage = pageObjectManager.getHomePage();
+		homePage.login(configFileData.getName(), configFileData.getPassword());
 	}
-	
-	@Then("User can see at least one result in the list of Hotels")
-	public void user_can_see_at_least_one_result_in_the_list_of_hotels() {
-		resultsPage = pageObjectManager.getResultsPage();
-		assertTrue(resultsPage.isListNotEmpty());
+	@When("User click on add to cart on a certain product")
+	public void user_click_on_add_to_cart_on_a_certain_product() {
+		productPage = pageObjectManager.getProductPage();
+		productPage.addProduct();
 	}
-	
-	@Then("User cannot see any result")
-	public void user_cannot_see_any_result() {
-		resultsPage = pageObjectManager.getResultsPage();
-		assertFalse(resultsPage.isListNotEmpty());
+	@When("User goes to shopping cart")
+	public void user_goes_to_shopping_cart() {
+		productPage.clickCart();
+	}
+	@Then("Selected product is on the cart")
+	public void selected_product_is_on_the_cart() {
+		cartPage = pageObjectManager.getCartPage();
+		cartPage.printProducts();
+		assertTrue(cartPage.containsProduct("Sauce Labs Backpack"));
 	}
 
 }

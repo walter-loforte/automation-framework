@@ -6,6 +6,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import io.cucumber.java.After;
@@ -40,8 +41,11 @@ public class Hooks {
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		 break;
-		 case "EXPLORER" : 
-			 //TODO
+		 case "EDGE" :
+			 WebDriverManager.edgedriver().setup();
+			 driver = new EdgeDriver();
+			 driver.manage().window().maximize();
+			 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		 break;
         }
 		
