@@ -1,6 +1,7 @@
 # Cucumber Automation Framework
 
 Java SDK Installed
+
 Maven installed
 
 run mvn clean test -Dbrowser=CHROME   -> Excute tests on Chrome
