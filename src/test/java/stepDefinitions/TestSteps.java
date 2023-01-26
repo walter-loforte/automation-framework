@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import io.cucumber.java.en.And;
 import org.openqa.selenium.WebDriver;
 
 import io.cucumber.java.en.Given;
@@ -20,20 +21,18 @@ public class TestSteps {
 	HomePage homePage;
 	ProductPage productPage;
 	CartPage cartPage;
-	PageObjectManager pageObjectManager;
-	ConfigFileData configFileData;
+	ConfigFileData configFileData = new ConfigFileData();;
 	protected WebDriver driver = Hooks.getDriver();
+	PageObjectManager pageObjectManager = new PageObjectManager(driver);
 	
 	@Given("^User is on Home Page$")
 	public void user_is_on_Home_Page() throws Throwable {
-		configFileData = new ConfigFileData();
 		driver.get(configFileData.getUrl());
+		homePage = pageObjectManager.getHomePage();
 	}
 
 	@When("User enters name and password")
 	public void user_enters_name_and_password() {
-		pageObjectManager = new PageObjectManager(driver);
-		homePage = pageObjectManager.getHomePage();
 		homePage.login(configFileData.getName(), configFileData.getPassword());
 	}
 	@Then("User is redirected to inventory page")
@@ -44,9 +43,7 @@ public class TestSteps {
 
 	@Given("User is on Product Page")
 	public void user_is_on_product_page() {
-		configFileData = new ConfigFileData();
 		driver.get(configFileData.getUrl());
-		pageObjectManager = new PageObjectManager(driver);
 		homePage = pageObjectManager.getHomePage();
 		homePage.login(configFileData.getName(), configFileData.getPassword());
 	}
@@ -55,7 +52,7 @@ public class TestSteps {
 		productPage = pageObjectManager.getProductPage();
 		productPage.addProduct();
 	}
-	@When("User goes to shopping cart")
+	@And("User goes to shopping cart")
 	public void user_goes_to_shopping_cart() {
 		productPage.clickCart();
 	}
